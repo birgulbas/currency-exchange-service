@@ -1,0 +1,45 @@
+server:
+  servlet:
+    context-path: /api
+
+Spring:
+  application:
+    name: currency-exchange-service
+
+  fox:
+    documentation:
+      swagger-ui:
+        base-url: /currency/swagger-ui
+  sql:
+    init:
+      platform: h2
+
+    jackson:
+      date-format: yyyy-MM-dd
+
+  spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+  datasource:
+    url: "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1"
+    driverClassName: "org.h2.Driver"
+    username: sa
+    password: sa
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+
+    spring:
+      webclient:
+        base-url: https://www.tcmb.gov.tr/kurlar/today.xml
