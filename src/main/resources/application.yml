@@ -15,13 +15,7 @@ Spring:
       platform: h2
 
     jackson:
-      date-format: yyyy-MM-dd
-
-  spring:
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-
+      date-format: MM/dd/yyyy
 
 spring:
   jpa:
@@ -33,13 +27,27 @@ spring:
     driverClassName: "org.h2.Driver"
     username: sa
     password: sa
-    driver-class-name: org.h2.Driver
+
   h2:
     console:
       enabled: true
       settings:
         web-allow-others: true
 
-    spring:
-      webclient:
-        base-url: https://www.tcmb.gov.tr/kurlar/today.xml
+api:
+  base:
+    url: "https://www.tcmb.gov.tr/kurlar"
+
+
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    org.springframework.web.client: DEBUG
+
+
+
+
+
+
