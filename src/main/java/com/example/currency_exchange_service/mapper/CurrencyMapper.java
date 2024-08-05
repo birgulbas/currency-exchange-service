@@ -1,8 +1,6 @@
 package com.example.currency_exchange_service.mapper;
 
-import com.example.currency_exchange_service.DTO.CurrencyCreateDTO;
-import com.example.currency_exchange_service.DTO.CurrencyFilterDTO;
-import com.example.currency_exchange_service.DTO.CurrencyUpdateDTO;
+import com.example.currency_exchange_service.DTO.*;
 import com.example.currency_exchange_service.entity.Currency;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +11,11 @@ public class CurrencyMapper {
 
         CurrencyCreateDTO currencyCreateDTO = new CurrencyCreateDTO();
 
-        currencyCreateDTO.setCurrencyType(currency.getCurrencyType());
+        currencyCreateDTO.setCurrencyCode(currency.getCurrencyCode());
         currencyCreateDTO.setCurrencyDate(currency.getCurrencyDate());
-        currencyCreateDTO.setBuyingCurrencyRate(currency.getBuyingCurrencyRate());
-        currencyCreateDTO.setSellingCurrencyRate(currency.getSellingCurrencyRate());
+        currencyCreateDTO.setCurrencyName(currency.getCurrencyName());
+        currencyCreateDTO.setForexBuying(currency.getForexBuying());
+        currencyCreateDTO.setForexSelling(currency.getForexSelling());
 
         return currencyCreateDTO;
     }
@@ -24,10 +23,11 @@ public class CurrencyMapper {
     public Currency mapToCurrency(CurrencyCreateDTO currencyCreateDTO) {
 
         Currency currency = new Currency();
-        currency.setCurrencyType(currencyCreateDTO.getCurrencyType());
+        currency.setCurrencyCode(currencyCreateDTO.getCurrencyCode());
         currency.setCurrencyDate(currencyCreateDTO.getCurrencyDate());
-        currency.setBuyingCurrencyRate(currencyCreateDTO.getBuyingCurrencyRate());
-        currency.setSellingCurrencyRate(currencyCreateDTO.getSellingCurrencyRate());
+        currency.setCurrencyName(currencyCreateDTO.getCurrencyName());
+        currency.setForexBuying(currencyCreateDTO.getForexBuying());
+        currency.setForexSelling(currencyCreateDTO.getForexSelling());
 
         return currency;
     }
@@ -36,10 +36,11 @@ public class CurrencyMapper {
     public CurrencyUpdateDTO mapToUpdateCurrencyDTO(Currency currency) {
         CurrencyUpdateDTO currencyUpdateDTO = new CurrencyUpdateDTO();
 
-        currencyUpdateDTO.setCurrencyType(currency.getCurrencyType());
+        currencyUpdateDTO.setCurrencyCode(currency.getCurrencyCode());
         currencyUpdateDTO.setCurrencyDate(currency.getCurrencyDate());
-        currencyUpdateDTO.setBuyingCurrencyRate(currency.getBuyingCurrencyRate());
-        currencyUpdateDTO.setSellingCurrencyRate(currency.getSellingCurrencyRate());
+        currencyUpdateDTO.setCurrencyName(currency.getCurrencyName());
+        currencyUpdateDTO.setForexBuying(currency.getForexBuying());
+        currencyUpdateDTO.setForexSelling(currency.getForexSelling());
 
         return currencyUpdateDTO;
     }
@@ -48,12 +49,65 @@ public class CurrencyMapper {
     public CurrencyFilterDTO mapToFilterCurrencyDTO(Currency currency) {
         CurrencyFilterDTO currencyFilterDTO = new CurrencyFilterDTO();
 
-        currencyFilterDTO.setCurrencyType(currency.getCurrencyType());
+
+        currencyFilterDTO.setCurrencyCode(currency.getCurrencyCode());
         currencyFilterDTO.setCurrencyDate(currency.getCurrencyDate());
-        currencyFilterDTO.setBuyingCurrencyRate(currency.getBuyingCurrencyRate());
-        currencyFilterDTO.setSellingCurrencyRate(currency.getSellingCurrencyRate());
+        currencyFilterDTO.setCurrencyName(currency.getCurrencyName());
+        currencyFilterDTO.setForexBuying(currency.getForexBuying());
+        currencyFilterDTO.setForexSelling(currency.getForexSelling());
 
         return currencyFilterDTO;
     }
 
+
+    public TcmbCurrenciesDTO mapToTcmbCurrenciesDTO(Currency currency) {
+        TcmbCurrenciesDTO tcmbCurrenciesDTO = new TcmbCurrenciesDTO();
+
+        tcmbCurrenciesDTO.setCurrencyCode(currency.getCurrencyCode());
+        tcmbCurrenciesDTO.setCurrencyDate(currency.getCurrencyDate());
+        tcmbCurrenciesDTO.setCurrencyName(currency.getCurrencyName());
+        tcmbCurrenciesDTO.setForexBuying(currency.getForexBuying());
+        tcmbCurrenciesDTO.setForexSelling(currency.getForexSelling());
+
+
+        return tcmbCurrenciesDTO;
+    }
+
+
+    public Currency mapToCurrencyTcmb(TcmbCurrenciesDTO tcmbCurrenciesDTO) {
+        Currency currency = new Currency();
+
+        currency.setCurrencyCode(tcmbCurrenciesDTO.getCurrencyCode());
+        currency.setCurrencyDate(tcmbCurrenciesDTO.getCurrencyDate());
+        currency.setCurrencyName(tcmbCurrenciesDTO.getCurrencyName());
+        currency.setForexBuying(tcmbCurrenciesDTO.getForexBuying());
+        currency.setForexSelling(tcmbCurrenciesDTO.getForexSelling());
+        return currency;
+    }
+
+
+    public TcmbYearCurrencyDTO mapToTcmbYearCurrencyDTO(Currency currency) {
+
+        TcmbYearCurrencyDTO tcmbYearCurrencyDTO = new TcmbYearCurrencyDTO();
+
+        tcmbYearCurrencyDTO.setCurrencyCode(currency.getCurrencyCode());
+        tcmbYearCurrencyDTO.setCurrencyDate(currency.getCurrencyDate());
+        tcmbYearCurrencyDTO.setCurrencyName(currency.getCurrencyName());
+        tcmbYearCurrencyDTO.setForexBuying(currency.getForexBuying());
+        tcmbYearCurrencyDTO.setForexSelling(currency.getForexSelling());
+
+        return tcmbYearCurrencyDTO;
+    }
+
+
+    public Currency mapToCurrencyTcmbYear(TcmbYearCurrencyDTO tcmbYearCurrencyDTO) {
+
+        Currency currency = new Currency();
+        currency.setCurrencyCode(tcmbYearCurrencyDTO.getCurrencyCode());
+        currency.setCurrencyDate(tcmbYearCurrencyDTO.getCurrencyDate());
+        currency.setCurrencyName(tcmbYearCurrencyDTO.getCurrencyName());
+        currency.setForexBuying(tcmbYearCurrencyDTO.getForexBuying());
+        currency.setForexSelling(tcmbYearCurrencyDTO.getForexSelling());
+        return currency;
+    }
 }

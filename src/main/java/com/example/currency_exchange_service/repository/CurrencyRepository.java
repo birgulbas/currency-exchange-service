@@ -13,20 +13,25 @@ import java.util.Optional;
 
 public interface CurrencyRepository extends JpaRepository<Currency, CompositeKey> {
 
-    List<Currency> findByCurrencyTypeAndCurrencyDate(String currencyType, LocalDate currencyDate);
+    List<Currency> findByCurrencyCodeAndCurrencyDate(String currencyType, LocalDate currencyDate);
 
-    List<Currency> findByCurrencyType(String currencyDate);
+    List<Currency> findByCurrencyCode(String currencyDate);
 
     List<Currency> findByCurrencyDate(LocalDate currencyDate);
 
-    boolean existsByCurrencyTypeAndCurrencyDate(String currencyType, LocalDate currencyDate);
+    boolean existsByCurrencyCodeAndCurrencyDate(String currencyType, LocalDate currencyDate);
 
-    @Query("SELECT c FROM Currency c WHERE c.currencyType = :currencyType AND c.deleted = false")
-    List<Currency> findTopByCurrencyTypeOrderByCurrencyDateDesc(@Param("currencyType") String currencyType);
+    @Query("SELECT c FROM Currency c WHERE c.currencyCode = :currencyType AND c.deleted = false ORDER BY c.currencyDate DESC")
+    List<Currency> findTopByCurrencyCodeOrderByCurrencyDateDesc(@Param("currencyType") String currencyType);
 
     @Query("SELECT c FROM Currency c WHERE c.deleted = false")
     List<Currency> findByDeletedFalse();
 
-    Optional<Currency> findByCurrencyTypeAndDeletedTrue(String currencyType);
+    Optional<Currency> findByCurrencyCodeAndDeletedTrue(String currencyType);
+
 
 }
+
+
+
+

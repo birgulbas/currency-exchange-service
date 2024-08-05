@@ -1,21 +1,18 @@
 package com.example.currency_exchange_service.DTO;
 
-import com.example.currency_exchange_service.CustomSerializer.CustomBigDecimalSerializer;
 import com.example.currency_exchange_service.CustomSerializer.CustomLocalDateDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Data
-public class CurrencyUpdateDTO {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class CurrencyDeleteDTO {
 
     @Size(min = 2, max = 5)
     @JacksonXmlProperty(localName = "CurrencyCode")
@@ -25,16 +22,21 @@ public class CurrencyUpdateDTO {
     @JacksonXmlProperty(localName = "Date")
     private LocalDate currencyDate;
 
-    @JacksonXmlProperty(localName = "CurrencyName")
-    private String currencyName;
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
 
-    @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    @JacksonXmlProperty(localName = "ForexBuying")
-    private BigDecimal forexBuying;
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
+    }
 
-    @JsonSerialize(using = CustomBigDecimalSerializer.class)
-    @JacksonXmlProperty(localName = "ForexSelling")
-    private BigDecimal forexSelling;
+    public LocalDate getCurrencyDate() {
+        return currencyDate;
+    }
+
+    public void setCurrencyDate(LocalDate currencyDate) {
+        this.currencyDate = currencyDate;
+    }
 
     public void normalize() { //küçük harfi büyük harfe normalize etmek için
 
@@ -43,6 +45,6 @@ public class CurrencyUpdateDTO {
 
         }
     }
-
-
 }
+
+

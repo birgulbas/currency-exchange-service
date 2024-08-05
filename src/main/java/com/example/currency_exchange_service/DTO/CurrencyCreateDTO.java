@@ -1,33 +1,45 @@
 package com.example.currency_exchange_service.DTO;
 
+import com.example.currency_exchange_service.CustomSerializer.CustomLocalDateDeserializer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import javax.xml.bind.annotation.XmlElement;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)//var olmayan alanarı göz ardı etmek için
 public class CurrencyCreateDTO {
 
     @Size(min = 2, max = 5)
-    @XmlElement(name = "Currency_Type")
-    private String currencyType;
+    @Pattern(regexp = "[a-zA-Z]{2,5}")
+    @JacksonXmlProperty(localName = "CurrencyCode")
+    private String currencyCode;
 
-    @XmlElement(name = "Currency_Date")
+    @JsonDeserialize(using = CustomLocalDateDeserializer.class)
+    @JacksonXmlProperty(localName = "Date")
     private LocalDate currencyDate;
 
-    @XmlElement(name = "Buying_Rate")
-    private BigDecimal buyingCurrencyRate;
+    @JacksonXmlProperty(localName = "CurrencyName")
+    private String currencyName;
 
-    @XmlElement(name = "Selling_Rate")
-    private BigDecimal sellingCurrencyRate;
+    @JacksonXmlProperty(localName = "ForexBuying")
+    private BigDecimal forexBuying;
+
+    @JacksonXmlProperty(localName = "ForexSelling")
+    private BigDecimal forexSelling;
 
     public void normalize() {
-        if (currencyType != null) {
-            currencyType = currencyType.trim().toUpperCase();
+        if (currencyCode != null) {
+            currencyCode = currencyCode.trim().toUpperCase();
         }
     }
+
+
 }
 

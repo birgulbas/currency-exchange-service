@@ -1,4 +1,4 @@
-package com.example.currency_exchange_service.CustomBigDecimalSerializer;
+package com.example.currency_exchange_service.CustomSerializer;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -16,7 +16,7 @@ public class CustomBigDecimalSerializer extends JsonSerializer<BigDecimal> {
 
     static {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
-        symbols.setDecimalSeparator(','); // Virgül ayırıcı olarak ayarla
+        symbols.setDecimalSeparator('.'); // Virgül ayırıcı olarak ayarla
 
         decimalFormat = new DecimalFormat("0.000", symbols);//virgülden sonra 4 sıfır
     }

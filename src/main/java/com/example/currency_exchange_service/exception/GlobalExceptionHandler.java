@@ -36,15 +36,21 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex, WebRequest request) {
         Map<String, String> errorResponse = new HashMap<>(); //hashmap nesnesi ile başlat //doğrulama hatalarını saklamak için map oluşturur
-        errorResponse.put("error", "your value is too long. Try enter between 2-5 character ");
+        errorResponse.put("error", " Your value is must be string and between 2-5 character!");
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }//Hata haritasını 400 Bad Request HTTP durumu koduyla döner.
 
 
-    @ExceptionHandler(CurrencyAlreadyDeletedException.class)
-    public ResponseEntity<String> handleCurrencyAlreadyDeletedException(CurrencyAlreadyDeletedException ex) {
-        // Hata mesajını döndürür
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    @ExceptionHandler(InvalidDateFormatException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidDateFormatException(InvalidDateFormatException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("error", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleGlobalExceptions(Exception ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
