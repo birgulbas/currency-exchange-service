@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class CurrencyCreateDTO {
 
     @Size(min = 2, max = 5)
-    @Pattern(regexp = "[a-zA-Z]{2,5}", message = "Currency code must be a string with 2 to 5 letters")
+    @Pattern(regexp = "[a-zA-Z]{2,5}")
     @JacksonXmlProperty(localName = "CurrencyCode")
     private String currencyCode;
 
